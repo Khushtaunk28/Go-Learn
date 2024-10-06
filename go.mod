@@ -1,3 +1,3 @@
-module userentry
+module example.com
 
 go 1.23.2

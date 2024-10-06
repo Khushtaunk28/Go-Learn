@@ -5,29 +5,29 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"userentry/note"
 
-	"golang.org/x/mod/sumdb/note"
+	"example.com/note"
 )
 
 func main() {
 	title, content := GetNoteData()
 	userNote, err := note.New(title, content)
+	userNote.Display()
+	err = userNote.SaveToFile()
 	if err != nil {
-		fmt.Println(err)
-		return "", err
+		fmt.Println("Saving Note failed")
+		return
 	}
-	userNote.Display
-
+	fmt.Println("Saving the Note succeed")
 }
 func GetNoteData() (string, string) {
-	title := GetUserInput("Note Title")
-	content := GetUserInput("Note Content")
+	title := GetUserInput("Note Title: ")
+	content := GetUserInput("Note Content: ")
 	return title, content
 }
 
 func GetUserInput(prompt string) string {
-	fmt.Print(prompt)
+	fmt.Printf("%v ", prompt)
 	reader := bufio.NewReader(os.Stdin)
 	text, err := reader.ReadString('\n')
 	if err != nil {
