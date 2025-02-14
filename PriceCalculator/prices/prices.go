@@ -8,13 +8,14 @@ import (
 
 
 type TaxIncludedPriceJob struct {
+	IOManager filemanager.FileManager
 	TaxRate          float64
 	InputPrices      []float64
 	TaxIncludedPrice map[string]float64
 }
 
 func (job  *TaxIncludedPriceJob) LoadPrices (){
-	line,err:=filemanager.ReadLines("prices.txt")
+	line,err:=job.IOManager.ReadLines()
 	prices,err:=conversion.StringToFloats(line)
 	if err!=nil{
 		fmt.Println("Error while reading file")
@@ -31,14 +32,16 @@ func (job *TaxIncludedPriceJob) Process() {
 		taxinclprice:=price * (1 + job.TaxRate)
 		result[fmt.Sprintf("%.2f",price)] = fmt.Sprintf("%.2f",taxinclprice)
 	}
-	fmt.Println(result);
+	//to store with dynamic names
+	job.IOManager.WriteResult(result)
+	//fmt.Println(result);
 }
 
 // Constructor generally the naming convention uses "new" keyword
-func NewTaxIncludedPriceJob(taxRate float64) *TaxIncludedPriceJob {
+func NewTaxIncludedPriceJob(fm filemanager.FileManager,taxRate float64) *TaxIncludedPriceJob {
 	return &TaxIncludedPriceJob{
+		IOManager: fm ,
 		InputPrices: []float64{10, 20, 20},
 		TaxRate:taxRate,
 	}
-
 }
