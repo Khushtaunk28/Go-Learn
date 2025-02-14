@@ -1,17 +1,17 @@
 package prices
 
 import (
-	"fmt"
 	"PriceCalculator/conversion"
-	"PriceCalculator/FileManager"
+	"PriceCalculator/iomanager"
+	"fmt"
 )
 
 
 type TaxIncludedPriceJob struct {
-	IOManager filemanager.FileManager
-	TaxRate          float64
-	InputPrices      []float64
-	TaxIncludedPrice map[string]float64
+	IOManager iomanager.IOManager `json:"-"`
+	TaxRate          float64 `"json:"tax_rate`
+	InputPrices      []float64 `json:"input_prices"`
+	TaxIncludedPrice map[string]float64 `json:"tax_included_Price"`
 }
 
 func (job  *TaxIncludedPriceJob) LoadPrices (){
@@ -38,9 +38,9 @@ func (job *TaxIncludedPriceJob) Process() {
 }
 
 // Constructor generally the naming convention uses "new" keyword
-func NewTaxIncludedPriceJob(fm filemanager.FileManager,taxRate float64) *TaxIncludedPriceJob {
+func NewTaxIncludedPriceJob(iom iomanager.IOManager,taxRate float64) *TaxIncludedPriceJob {
 	return &TaxIncludedPriceJob{
-		IOManager: fm ,
+		IOManager: iom ,
 		InputPrices: []float64{10, 20, 20},
 		TaxRate:taxRate,
 	}
