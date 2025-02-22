@@ -14,26 +14,30 @@ type TaxIncludedPriceJob struct {
 	TaxIncludedPrice map[string]float64 `json:"tax_included_Price"`
 }
 
-func (job  *TaxIncludedPriceJob) LoadPrices (){
+func (job  *TaxIncludedPriceJob) LoadPrices () error{
 	line,err:=job.IOManager.ReadLines()
 	prices,err:=conversion.StringToFloats(line)
 	if err!=nil{
 		fmt.Println("Error while reading file")
 		fmt.Println(err) 
-		return
+		return err
 	}
 job.InputPrices=prices
+return nil
 }
 
-func (job *TaxIncludedPriceJob) Process() {
-	job.LoadPrices()
+func (job *TaxIncludedPriceJob) Process() error {
+	err:=job.LoadPrices()
+	if err!=nil{
+		return err
+	}
 	result := make(map[string]string)
 	for _, price := range job.InputPrices {
 		taxinclprice:=price * (1 + job.TaxRate)
 		result[fmt.Sprintf("%.2f",price)] = fmt.Sprintf("%.2f",taxinclprice)
 	}
 	//to store with dynamic names
-	job.IOManager.WriteResult(result)
+	return job.IOManager.WriteResult(result)
 	//fmt.Println(result);
 }
 
