@@ -1,0 +1,9 @@
+POST http://localhost:8080/events
+content-Type: application/json
+
+{
+    "Name":"ktboss2323" ,
+    "Description":"tesdsfsdt",
+    "location": "vs cdfsdode", 
+    "DateTime":"2025-01-01T18:44:00.000Z"
+}
