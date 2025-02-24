@@ -12,6 +12,6 @@ func RegisteredRoutes(server *gin.Engine){
 
 	//user handling routes
 	server.POST("/signup",SaveUser)
-
+	server.POST("/login",Login)
 
 }

@@ -23,3 +23,22 @@ func SaveUser(context *gin.Context){
 	context.JSON(http.StatusOK,gin.H{"msg":"user created and saved"})
 
 }
+
+func Login(context *gin.Context){
+	var user models.User
+
+	err:=context.ShouldBindJSON(&user)
+	if err!=nil{
+		context.JSON(http.StatusBadRequest, gin.H{"message": "missing fields"})
+		return
+	}
+
+	err=user.ValidateCred()
+	if err!=nil{
+		context.JSON(http.StatusUnauthorized,gin.H{"msg":"invalid password"})
+		return
+	}
+
+	context.JSON(http.StatusOK,gin.H{"msg":"Login success"})
+	
+}

@@ -3,6 +3,7 @@ package models
 import (
 	"Event_Booking/db"
 	"Event_Booking/utils"
+	"errors"
 )
 
 type User struct {
@@ -31,4 +32,19 @@ func (u User) Save() error {
 	userId,err:=res.LastInsertId()
 	u.ID=userId
 	return err
+}
+
+func (u User) ValidateCred() error{
+	query:="SELECT email ,password FROM users WHERE email=?"
+	row:=db.DB.QueryRow(query,u.Email)
+	var retrvpass string
+	err:=row.Scan(&u.ID,&retrvpass)
+	if err!=nil{
+		return err
+	}
+	passIsValid:=utils.CheckPassword(u.Password,retrvpass)
+	if !passIsValid{
+		return errors.New("Invalid credentials")
+	}
+	return nil
 }
