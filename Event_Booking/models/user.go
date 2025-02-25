@@ -35,7 +35,7 @@ func (u User) Save() error {
 }
 
 func (u User) ValidateCred() error{
-	query:="SELECT email ,password FROM users WHERE email=?"
+	query:="SELECT id ,password FROM users WHERE email=?"
 	row:=db.DB.QueryRow(query,u.Email)
 	var retrvpass string
 	err:=row.Scan(&u.ID,&retrvpass)
