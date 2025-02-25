@@ -3,6 +3,7 @@ package routes
 import (
 	//"Event_Booking/db"
 	"Event_Booking/models"
+	"Event_Booking/utils"
 	//"Context"
 	"net/http"
 	"strconv"
@@ -87,8 +88,20 @@ func getEvent(context *gin.Context) {
 
 // post to create a new event
 func createEvent(context *gin.Context) {
+	token:=context.Request.Header.Get("Authorization")
+
+	if token ==""{
+		context.JSON(http.StatusUnauthorized,gin.H{"msg":"jwt token empty"})
+		return
+	}
+	err:=utils.VerifyToken(token)
+	if err!=nil{
+		context.JSON(http.StatusUnauthorized,gin.H{"msg":"Not authorized"})
+		return
+	}
+
 	var event models.Event
-	err := context.ShouldBindJSON(&event)
+	err = context.ShouldBindJSON(&event)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"message": "missing fields"})
 		return
