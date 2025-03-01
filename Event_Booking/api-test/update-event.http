@@ -1,5 +1,6 @@
-PUT http://localhost:8080/events/1
+PUT http://localhost:8080/events/2
 Content-Type: application/json
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtodXNoLnRhdW5rQGdtYWlsLmNvbSIsImV4cCI6MTc0MDg0MzMxNywidXNlcklkIjoxfQ.ZR1hm6wa4M2vXi2H0qeu0GMZNGspgR6QEG3g3eknehU
 
 {
     "Name":"ktbossupdated" ,
