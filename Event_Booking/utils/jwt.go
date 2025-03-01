@@ -36,13 +36,9 @@ func VerifyToken(token string) error{
 	//extraction of email and password
 	// claims,ok:=paresdToken.Claims.(jwt.MapClaims)
 	// if !ok{
-	// 	return nil,errors.New("invalid token")
+	// 	return errors.New("invalid token")
 	// }
 	// email:=claims["email"].(string)
-	// userId:=claims["userId"].(int64)
-	return nil
-
-
-
-
+	//userId:=int64(claims["userId"].(float64))
+	return err
 }

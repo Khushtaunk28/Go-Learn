@@ -106,7 +106,7 @@ func createEvent(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"message": "missing fields"})
 		return
 	}
-	event.ID = 1
+	// event.ID = 1
 	event.UserID = 1
 	err = event.Save()
 
