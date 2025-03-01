@@ -1,10 +1,10 @@
 POST http://localhost:8080/events
 content-Type: application/json
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtodXNoLnRhdW5rQGdtYWlsLmNvbSIsImV4cCI6MTc0MDg0MTYwOSwidXNlcklkIjowfQ.puzO6pih4KBwSz_gbnLKlxeaIkuhsWFnfvrcgqvAsAg
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtodXNoLnRhdW5rQGdtYWlsLmNvbSIsImV4cCI6MTc0MDg0MjMxMCwidXNlcklkIjoxfQ.-0AXodTXoMajWUSHY0xvC2NxkCz_0kvxwqe0ulS-RFA
 
 {
     "Name":"ktboss2" ,
-    "Description":"tesdsfsdt",
+    "Description":"tesfsdfsddsfsdt",
     "location": "vs cdfsdode", 
     "DateTime":"2025-01-01T18:44:00.000Z"
 }

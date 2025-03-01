@@ -4,6 +4,7 @@ import (
 	//"Event_Booking/db"
 	"Event_Booking/models"
 	"Event_Booking/utils"
+
 	//"Context"
 	"net/http"
 	"strconv"
@@ -88,15 +89,15 @@ func getEvent(context *gin.Context) {
 
 // post to create a new event
 func createEvent(context *gin.Context) {
-	token:=context.Request.Header.Get("Authorization")
+	token := context.Request.Header.Get("Authorization")
 
-	if token ==""{
-		context.JSON(http.StatusUnauthorized,gin.H{"msg":"jwt token empty"})
+	if token == "" {
+		context.JSON(http.StatusUnauthorized, gin.H{"msg": "jwt token empty"})
 		return
 	}
-	err:=utils.VerifyToken(token)
-	if err!=nil{
-		context.JSON(http.StatusUnauthorized,gin.H{"msg":"Not authorized"})
+	userId, err := utils.VerifyToken(token)
+	if err != nil {
+		context.JSON(http.StatusUnauthorized, gin.H{"msg": "Not authorized"})
 		return
 	}
 
@@ -107,7 +108,7 @@ func createEvent(context *gin.Context) {
 		return
 	}
 	// event.ID = 1
-	event.UserID = 1
+	event.UserID = userId
 	err = event.Save()
 
 	if err != nil {
